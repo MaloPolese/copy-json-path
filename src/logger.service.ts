@@ -1,5 +1,4 @@
 import { window } from 'vscode';
-import { EXTENTION_NAME } from './constants';
 
 enum LoggerType {
   LOG = 'LOG',
@@ -17,6 +16,7 @@ export class LoggerService {
 
   log(message: string): void {
     this.execute(message, LoggerType.LOG);
+    window.showInformationMessage(message);
   }
 
   warning(message: string): void {
@@ -25,6 +25,7 @@ export class LoggerService {
 
   error(message: string): void {
     this.execute(message, LoggerType.ERROR);
+    window.showErrorMessage(message);
   }
 
   private execute(message: string, type: LoggerType): void {
