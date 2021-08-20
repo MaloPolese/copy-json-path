@@ -6,7 +6,6 @@ enum LoggerType {
   WARN = 'WARN',
   ERROR = 'ERROR',
 }
-
 export class LoggerService {
   private outputChannel = window.createOutputChannel('Copy Json Path - Log');
 

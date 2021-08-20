@@ -1,7 +1,7 @@
-import { env, window, workspace } from 'vscode';
+import { env, window } from 'vscode';
 import { LoggerService } from '../logger.service';
 import * as jsonc from 'jsonc-parser';
-import { Command } from '../decorator/command.decorator';
+import { Command } from '../decorators/command.decorator';
 
 enum FileType {
   JSON = 'json',
@@ -32,7 +32,16 @@ export class Copy {
 
       if (offset && text) {
         const location = jsonc.getLocation(text, offset);
-        const path = location.path.join('.'); // TODO
+        const path: string = location.path.reduce(
+          (acc: string, val: any, index: number): string => {
+            if (Number.isInteger(val)) {
+              return index === 0 ? `[${val}]` : `${acc}[${val}]`;
+            } else {
+              return index === 0 ? val : `${acc}.${val}`;
+            }
+          },
+          '',
+        );
         env.clipboard
           .writeText(path)
           .then(() => this.loggerService.log('Path copied'));

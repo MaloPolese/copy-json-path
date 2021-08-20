@@ -1,4 +1,4 @@
-import { commands, Disposable, window } from 'vscode';
+import { commands, Disposable } from 'vscode';
 import { LoggerService } from '../logger.service';
 import { Copy } from './copy.command';
 
