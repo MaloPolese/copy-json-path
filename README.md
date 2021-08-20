@@ -14,7 +14,7 @@
 
 </div>
 
-Extention allow you to copy json path
+This extension allows you to copy and paste a jsonpath
 
 # Install
 
