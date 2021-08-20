@@ -2,12 +2,12 @@
   "name": "copy-json-path",
   "publisher": "Malo",
   "displayName": "Copy Json Path",
-  "description": "Extension allowing to copy and paste the path of a json key",
+  "description": "This extension allows you to copy and paste a jsonpath",
   "icon": "assets/logo.png",
   "repository": {
     "url": "https://github.com/MaloPolese/copy-json-path/tree/main"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.58.0"
   },
