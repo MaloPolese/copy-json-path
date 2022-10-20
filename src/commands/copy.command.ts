@@ -1,6 +1,7 @@
 import { env, window } from 'vscode';
 import { LoggerService } from '../logger.service';
 import * as jsonc from 'jsonc-parser';
+import isVarName from 'is-var-name';
 import { Command } from '../decorators/command.decorator';
 
 enum FileType {
@@ -37,7 +38,14 @@ export class Copy {
             if (Number.isInteger(val)) {
               return index === 0 ? `[${val}]` : `${acc}[${val}]`;
             } else {
-              return index === 0 ? val : `${acc}.${val}`;
+              const isValidJsIdentifier = isVarName(val);
+              if (isValidJsIdentifier) {
+                const valEscaped = val.replace(/'"'/g, '\\"').replace(/\\/g, '\\\\');
+                const valPropertyPath = `["${valEscaped}"]`;
+                return index === 0 ? valPropertyPath : (acc + valPropertyPath);
+              } else {
+                return index === 0 ? val : `${acc}.${val}`;
+              }
             }
           },
           '',
