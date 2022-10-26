@@ -1,8 +1,7 @@
 import * as assert from 'assert';
 import getJsonPath, {
   propertyRequiresQuotes,
-  escapePropertyPath,
-  escapePropertyNameWithQuotes,
+  getPropertyPathWithQuotes,
 } from '../../json.path';
 
 // You can import and use all API from the 'vscode' module
@@ -54,7 +53,7 @@ suite('Extension Test Suite', () => {
     expectQuoted: boolean,
     propertyValue: any = 1,
   ) {
-    const propertyNameEscaped = escapePropertyPath(propertyName);
+    const propertyNameEscaped = getPropertyPathWithQuotes(propertyName);
     const expectedPropertyPath = expectQuoted
       ? propertyNameEscaped
       : '.' + propertyName;
@@ -78,7 +77,7 @@ suite('Extension Test Suite', () => {
   }
 
   function generateJson(propertyName: string, propertyValue: any = 1) {
-    var propertyNameEscaped = escapePropertyNameWithQuotes(propertyName);
+    var propertyNameEscaped = JSON.stringify(propertyName);
     return `{ "${propertyNameEscaped}": ${propertyValue} }`;
   }
 

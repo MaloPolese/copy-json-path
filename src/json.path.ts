@@ -4,7 +4,7 @@ export default function getJsonPath(jsonText: string, offsetPosition: number) {
   const location = jsonc.getLocation(jsonText, offsetPosition);
   const path: string = location.path.reduce(
     (accumulated: string, propertyName: any, index: number): string => {
-      var propertyPath = getJsonPathToProperty(propertyName);
+      var propertyPath = getPropertyPath(propertyName);
       if (index !== 0) {
         return accumulated + propertyPath;
       } else {
@@ -16,25 +16,20 @@ export default function getJsonPath(jsonText: string, offsetPosition: number) {
   return path;
 }
 
-function getJsonPathToProperty(propertyName: any): string {
+function getPropertyPath(propertyName: any): string {
   if (Number.isInteger(propertyName)) {
     return `[${propertyName}]`;
   }
   const requiresQuotes = propertyRequiresQuotes(propertyName);
   if (requiresQuotes) {
-    return escapePropertyPath(propertyName);
+    return getPropertyPathWithQuotes(propertyName);
   }
   return '.' + propertyName;
 }
 
-export function escapePropertyPath(propertyName: any): string {
-  const valEscaped = escapePropertyNameWithQuotes(propertyName);
-  const valPropertyPath = `["${valEscaped}"]`;
-  return valPropertyPath;
-}
-
-export function escapePropertyNameWithQuotes(propertyName: any): string {
-  return propertyName.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+export function getPropertyPathWithQuotes(propertyName: any): string {
+  const propertyNameJson = JSON.stringify(propertyName);
+  return `[${propertyNameJson}]`;
 }
 
 export function propertyRequiresQuotes(propertyName: any): boolean {
