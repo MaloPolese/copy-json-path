@@ -22,6 +22,7 @@ suite('Extension Test Suite', () => {
   });
 
   test('propertyRequiresQuotes test characters that require escaping', () => {
+    propertyRequiresQuotesTest('', true);
     for (let c of charactersWithEscapeRequired) {
       propertyRequiresQuotesTest(`_${c}_`, true);
     }
@@ -43,6 +44,7 @@ suite('Extension Test Suite', () => {
   });
 
   test('getJsonPath test characters that require escaping', () => {
+    test_getJsonPath('', true);
     for (let c of charactersWithEscapeRequired) {
       test_getJsonPath(`_${c}_`, true);
     }
@@ -70,7 +72,11 @@ suite('Extension Test Suite', () => {
     propertyValue: any = 1,
   ) {
     const jsonText = generateJson(propertyName, propertyValue);
-    JSON.parse(jsonText);
+    try {
+      JSON.parse(jsonText);
+    } catch (exception) {
+      throw new Error(`Invalid generated json ${jsonText} \r ${exception}`);
+    }
     const propertyCharPosition = 3;
     test_getJsonPath_name(jsonText, propertyCharPosition, expectedPropertyPath);
     test_getJsonPath_value(jsonText, propertyCharPosition, propertyValue);
@@ -78,7 +84,7 @@ suite('Extension Test Suite', () => {
 
   function generateJson(propertyName: string, propertyValue: any = 1) {
     var propertyNameEscaped = JSON.stringify(propertyName);
-    return `{ "${propertyNameEscaped}": ${propertyValue} }`;
+    return `{ ${propertyNameEscaped}: ${propertyValue} }`;
   }
 
   function test_getJsonPath_name(
