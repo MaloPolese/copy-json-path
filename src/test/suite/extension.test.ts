@@ -2,6 +2,7 @@ import * as assert from 'assert';
 import getJsonPath, {
   propertyRequiresQuotes,
   getPropertyPathWithQuotes,
+  nonQuotedCharacterRanges,
 } from '../../json.path';
 
 // You can import and use all API from the 'vscode' module
@@ -47,6 +48,20 @@ suite('Extension Test Suite', () => {
     test_getJsonPath('', true);
     for (let c of charactersWithEscapeRequired) {
       test_getJsonPath(`_${c}_`, true);
+    }
+  });
+
+  test.only('getJsonPath test characters without escaping from allowed ranges', () => {
+    for (let range of nonQuotedCharacterRanges) {
+      for (
+        let index = range.charCodeAt(0);
+        index <= range.charCodeAt(2);
+        index++
+      ) {
+        const c = String.fromCharCode(index);
+        console.log(`Testing range '${range}' char: '${c}', index: ${index}`);
+        test_getJsonPath(c, false);
+      }
     }
   });
 

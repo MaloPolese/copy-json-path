@@ -32,8 +32,14 @@ export function getPropertyPathWithQuotes(propertyName: any): string {
   return `[${propertyNameJson}]`;
 }
 
+export const nonQuotedCharacterRanges = ['A-Z', 'À-Ö', 'Ø-ö', 'ø-ÿ'];
+
 export function propertyRequiresQuotes(propertyName: any): boolean {
   // https://stackoverflow.com/questions/20690499/concrete-javascript-regular-expression-for-accented-characters-diacritics/26900132#26900132
-  const allowedCharactersWithoutEscaping = /^[A-ZÀ-ÖØ-öø-ÿ_\$]+$/i;
+  var allowedCharRanges = nonQuotedCharacterRanges.join('');
+  const allowedCharactersWithoutEscaping = new RegExp(
+    `^[${allowedCharRanges}_\$]+$`,
+    'gi',
+  );
   return !allowedCharactersWithoutEscaping.test(propertyName);
 }
