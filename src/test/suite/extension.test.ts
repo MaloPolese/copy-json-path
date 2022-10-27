@@ -51,7 +51,7 @@ suite('Extension Test Suite', () => {
     }
   });
 
-  test.only('getJsonPath test characters without escaping from allowed ranges', () => {
+  test('getJsonPath test characters without escaping from allowed ranges', () => {
     for (let range of nonQuotedCharacterRanges) {
       for (
         let index = range.charCodeAt(0);
