@@ -25,19 +25,21 @@ export class Copy {
   }
 
   register() {
-    if (this.canExecuteCommand()) {
-      const editor = window.activeTextEditor;
-      const text = editor?.document.getText();
-      const offset = editor?.document.offsetAt(editor?.selection.start);
+    if (!this.canExecuteCommand()) {
+      return;
+    }
 
-      if (offset && text) {
-        const path: string = getJsonPath(text, offset);
-        env.clipboard
-          .writeText(path)
-          .then(() => this.loggerService.log('Path copied'));
-      } else {
-        this.loggerService.error('Fail to copy path');
-      }
+    const editor = window.activeTextEditor;
+    const text = editor?.document.getText();
+    const offset = editor?.document.offsetAt(editor?.selection.start);
+
+    if (offset && text) {
+      const path: string = getJsonPath(text, offset);
+      env.clipboard
+        .writeText(path)
+        .then(() => this.loggerService.log('Path copied'));
+    } else {
+      this.loggerService.error('Fail to copy path');
     }
   }
 }
