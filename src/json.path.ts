@@ -8,8 +8,9 @@ export default function getJsonPath(jsonText: string, offsetPosition: number) {
       propertyName: jsonc.Segment,
       index: number,
     ): string => {
-      const propertyPath = getPropertyPath(propertyName);
-      if (index !== 0) {
+      const isFirst = index === 0;
+      const propertyPath = getPropertyPath(propertyName, isFirst);
+      if (!isFirst) {
         return accumulated + propertyPath;
       }
       return propertyPath;
@@ -19,13 +20,19 @@ export default function getJsonPath(jsonText: string, offsetPosition: number) {
   return path;
 }
 
-function getPropertyPath(propertyName: jsonc.Segment): string {
+function getPropertyPath(
+  propertyName: jsonc.Segment,
+  isFirst: boolean,
+): string {
   if (Number.isInteger(propertyName)) {
     return `[${propertyName}]`;
   }
   const requiresQuotes = propertyRequiresQuotes(propertyName);
   if (requiresQuotes) {
     return getPropertyPathWithQuotes(propertyName);
+  }
+  if (isFirst) {
+    return propertyName.toString();
   }
   return '.' + propertyName;
 }
