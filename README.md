@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Super Linter](https://img.shields.io/github/workflow/status/MaloPolese/copy-json-path/CI?style=flat-square&logo=github&label=Build&color=brightgreen)](https://github.com/MaloPolese/copy-json-path/tree/main)
+[![Super Linter](https://img.shields.io/github/actions/workflow/status/MaloPolese/copy-json-path/main.yml?branch=main)](https://github.com/MaloPolese/copy-json-path/tree/main)
 [![Last Commit](https://img.shields.io/github/repo-size/MaloPolese/copy-json-path?style=flat-square&label=Repo&color=4F98CA)](https://github.com/MaloPolese/copy-json-path/tree/main)
 [![Last Commit](https://img.shields.io/github/license/MaloPolese/copy-json-path?style=flat-square&logo=GNU&label=License)](https://github.com/MaloPolese/copy-json-path/tree/main)
 [![GitHub Issues](https://img.shields.io/github/issues/MaloPolese/copy-json-path.svg?style=flat-square&label=Issues&color=FF70A7)](https://github.com/MaloPolese/copy-json-path/issues)
@@ -18,7 +18,7 @@ This extension allows you to copy and paste a jsonpath
 
 # Install
 
-1. Install extension from [Marketplace](https://marketplace.visualstudio.com/items?itemName=Malo.copy-json-path)
+1. Install extension from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Malo.copy-json-path) or [Open VSX Registry](https://open-vsx.org/extension/Malo/copy-json-path)
 2. Enjoy
 
 # Usage
