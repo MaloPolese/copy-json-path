@@ -38,6 +38,19 @@
           "type": "boolean",
           "default": false,
           "description": "Use bracket notation instead of dot notation"
+        },
+        "json.copyJsonPath.quote": {
+          "type": "string",
+          "default": "Double",
+          "enum": [
+            "Single",
+            "Double"
+          ],
+          "description": "Use single or double quote in bracket notation",
+          "enumDescriptions": [
+            "Use single quote",
+            "Use double quote"
+          ]
         }
       }
     },

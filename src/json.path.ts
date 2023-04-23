@@ -1,9 +1,15 @@
 import * as jsonc from 'jsonc-parser';
 import { TextEditor } from 'vscode';
 
+enum QuoteType {
+  Single = 'Single',
+  Double = 'Double',
+}
+
 interface Options {
   includeFileName?: boolean;
   useBracketNotation?: boolean;
+  quote?: String;
 }
 
 export default function getJsonPath(
@@ -56,7 +62,7 @@ function getPropertyPath(
   }
   const requiresQuotes = propertyRequiresQuotes(propertyName);
   if (requiresQuotes || options?.useBracketNotation) {
-    return getPropertyPathWithQuotes(propertyName);
+    return getPropertyPathWithQuotes(propertyName, options);
   }
   if (isFirst) {
     return propertyName.toString();
@@ -64,8 +70,21 @@ function getPropertyPath(
   return '.' + propertyName;
 }
 
-export function getPropertyPathWithQuotes(propertyName: jsonc.Segment): string {
-  const propertyNameJson = JSON.stringify(propertyName);
+export function getPropertyPathWithQuotes(
+  propertyName: jsonc.Segment,
+  options?: Options,
+): string {
+  let propertyNameJson: String = JSON.stringify(propertyName);
+
+  let escapeChar = '"';
+  if (options?.quote === QuoteType.Single) {
+    escapeChar = "'";
+  } else if (options?.quote === QuoteType.Double) {
+    escapeChar = '"';
+  }
+
+  propertyNameJson = propertyNameJson.replace(/^"|"$/g, escapeChar);
+
   return `[${propertyNameJson}]`;
 }
 
