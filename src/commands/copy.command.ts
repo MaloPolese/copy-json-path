@@ -1,4 +1,4 @@
-import { env, window } from 'vscode';
+import { env, window, workspace } from 'vscode';
 import { LoggerService } from '../logger.service';
 import getJsonPath from '../json.path';
 import { Command } from '../decorators/command.decorator';
@@ -40,8 +40,15 @@ export class Copy {
     const text = editor?.document.getText();
     const offset = editor?.document.offsetAt(editor?.selection.start);
 
+    const configuration = workspace.getConfiguration('json.copyJsonPath');
+
+    const useBracketNotation = configuration.get<boolean>('useBracketNotation');
+
     if (offset && text) {
-      const path: string = getJsonPath(text, offset);
+      let path: string = getJsonPath(text, offset, {
+        useBracketNotation,
+      });
+
       env.clipboard
         .writeText(path)
         .then(() => this.loggerService.log('Path copied'));
