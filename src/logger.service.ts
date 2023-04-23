@@ -7,7 +7,7 @@ enum LoggerType {
   ERROR = 'ERROR',
 }
 export class LoggerService {
-  private outputChannel = window.createOutputChannel('Copy Json Path - Log');
+  private outputChannel = window.createOutputChannel('Copy Json Path');
 
   debug(message: string): void {
     this.execute(message, LoggerType.DEBUG);

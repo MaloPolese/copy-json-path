@@ -32,6 +32,11 @@
           "when": "resourceLangId == json",
           "command": "copy-json-path.copy",
           "group": "copyPath"
+        },
+        {
+          "when": "resourceLangId == jsonc",
+          "command": "copy-json-path.copy",
+          "group": "copyPath"
         }
       ]
     }
