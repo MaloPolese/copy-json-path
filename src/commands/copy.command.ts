@@ -5,6 +5,7 @@ import { Command } from '../decorators/command.decorator';
 
 enum FileType {
   JSON = 'json',
+  JSONC = 'jsonc',
 }
 
 @Command()
@@ -14,14 +15,20 @@ export class Copy {
   }
 
   private canExecuteCommand(): boolean {
-    let canExecuteCommand = true;
-    if (window?.activeTextEditor?.document.languageId !== FileType.JSON) {
+    const fileLanguage = window?.activeTextEditor?.document?.languageId;
+    this.loggerService.debug(`File language: ${fileLanguage}`);
+
+    const isJsonFile = Object.values(FileType).includes(
+      fileLanguage as FileType,
+    );
+
+    if (!isJsonFile) {
       this.loggerService.error(
         'You must be in a json file to execute this command',
       );
-      canExecuteCommand = false;
     }
-    return canExecuteCommand;
+
+    return isJsonFile;
   }
 
   register() {
