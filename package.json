@@ -51,6 +51,11 @@
             "Use single quote",
             "Use double quote"
           ]
+        },
+        "json.copyJsonPath.output": {
+          "type": "string",
+          "default": "%PATH%",
+          "description": "Control the output of the path. %PATH% will be replaced by the path. You can add text before and after the path."
         }
       }
     },

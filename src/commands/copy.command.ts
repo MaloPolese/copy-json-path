@@ -45,13 +45,19 @@ export class Copy {
     const includeFileName = configuration.get<boolean>('includeFileName');
     const useBracketNotation = configuration.get<boolean>('useBracketNotation');
     const quote = configuration.get<String>('quote');
+    const pathOutput = configuration.get<string>('output') ?? '%PATH%';
+
+    this.loggerService.debug(`PathOutput: ${pathOutput}`);
 
     if (offset && text) {
-      let path: string = getJsonPath(text, offset, editor, {
+      const rawPath: string = getJsonPath(text, offset, editor, {
         includeFileName,
         useBracketNotation,
         quote,
       });
+      this.loggerService.debug(`Raw path: ${rawPath}`);
+
+      const path = pathOutput.replace('%PATH%', rawPath);
 
       env.clipboard
         .writeText(path)
