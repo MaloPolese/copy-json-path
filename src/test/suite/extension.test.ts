@@ -107,7 +107,7 @@ suite('Extension Test Suite', () => {
     offsetPosition: number,
     expectedPropertyPath: any,
   ) {
-    var jsonPath = getJsonPath(jsonText, offsetPosition);
+    var jsonPath = getJsonPath(jsonText, offsetPosition, undefined);
     assert.strictEqual(
       jsonPath,
       expectedPropertyPath,
@@ -120,7 +120,7 @@ suite('Extension Test Suite', () => {
     offsetPosition: number,
     expectedValue: any,
   ) {
-    var jsonPath = getJsonPath(jsonText, offsetPosition);
+    var jsonPath = getJsonPath(jsonText, offsetPosition, undefined);
     var parsedJson = JSON.parse(jsonText);
     const actualValue = eval('parsedJson' + jsonPath);
     assert.strictEqual(

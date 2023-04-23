@@ -29,6 +29,11 @@
     "configuration": {
       "title": "Copy Json Path",
       "properties": {
+        "json.copyJsonPath.includeFileName": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include the name of the json file at the beginning of the path"
+        },
         "json.copyJsonPath.useBracketNotation": {
           "type": "boolean",
           "default": false,
