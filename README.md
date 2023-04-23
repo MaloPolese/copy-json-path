@@ -51,3 +51,17 @@ When you use the bracket notation the key is surrounded by quotes. With the `cop
 The default value is `Double`.
 
 ![Quote setting](assets/settings-quote.png 'Quote')
+
+## Output
+
+If you want to change the output format, you can change the `copy-json-path.output` setting.
+
+![Output setting](assets/settings-output.png 'Output')
+
+The default output is only the json path represented by the %PATH% variable.
+
+For example, you can change it as follows:
+![Output html](assets/settings-output-html.png 'Output html')
+
+and the result in your clipboard will be :
+`<TMPL_VAR NAME="path.to.key">`
