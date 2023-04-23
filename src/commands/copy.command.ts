@@ -44,11 +44,13 @@ export class Copy {
 
     const includeFileName = configuration.get<boolean>('includeFileName');
     const useBracketNotation = configuration.get<boolean>('useBracketNotation');
+    const quote = configuration.get<String>('quote');
 
     if (offset && text) {
       let path: string = getJsonPath(text, offset, editor, {
         includeFileName,
         useBracketNotation,
+        quote,
       });
 
       env.clipboard

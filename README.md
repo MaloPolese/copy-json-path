@@ -44,3 +44,10 @@ If you want to use bracket notation instead of dot notation, you can set the `co
 If you want to add the file name at the beginning of the path, you can set the `copy-json-path.includeFileName` setting to `true`.
 
 ![File name setting](assets/settings-file-name.png 'file name')
+
+## Quotes
+
+When you use the bracket notation the key is surrounded by quotes. With the `copy-json-path.quote` setting you can choose the type of quotes to use `Single` or `Double`.
+The default value is `Double`.
+
+![Quote setting](assets/settings-quote.png 'Quote')
