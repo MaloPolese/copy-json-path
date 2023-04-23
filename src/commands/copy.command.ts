@@ -42,10 +42,12 @@ export class Copy {
 
     const configuration = workspace.getConfiguration('json.copyJsonPath');
 
+    const includeFileName = configuration.get<boolean>('includeFileName');
     const useBracketNotation = configuration.get<boolean>('useBracketNotation');
 
     if (offset && text) {
-      let path: string = getJsonPath(text, offset, {
+      let path: string = getJsonPath(text, offset, editor, {
+        includeFileName,
         useBracketNotation,
       });
 

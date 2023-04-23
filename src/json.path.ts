@@ -2,17 +2,24 @@ import * as jsonc from 'jsonc-parser';
 import { TextEditor } from 'vscode';
 
 interface Options {
+  includeFileName?: boolean;
   useBracketNotation?: boolean;
 }
 
 export default function getJsonPath(
   jsonText: string,
   offsetPosition: number,
+  editor: TextEditor | undefined,
   options?: Options,
 ) {
   const location = jsonc.getLocation(jsonText, offsetPosition);
 
-  const path: string = location.path.reduce(
+  const locationPath = location.path;
+  if (options?.includeFileName) {
+    includeTitle(locationPath, editor);
+  }
+
+  const path: string = locationPath.reduce(
     (
       accumulated: string,
       propertyName: jsonc.Segment,
@@ -28,6 +35,15 @@ export default function getJsonPath(
     '',
   );
   return path;
+}
+
+function includeTitle(path: jsonc.JSONPath, editor: TextEditor | undefined) {
+  const fileName = editor?.document.fileName.split('/').pop()?.split('.')[0];
+
+  if (fileName) {
+    const a: jsonc.Segment = fileName;
+    path.unshift(fileName);
+  }
 }
 
 function getPropertyPath(
