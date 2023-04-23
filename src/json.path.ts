@@ -1,7 +1,17 @@
 import * as jsonc from 'jsonc-parser';
+import { TextEditor } from 'vscode';
 
-export default function getJsonPath(jsonText: string, offsetPosition: number) {
+interface Options {
+  useBracketNotation?: boolean;
+}
+
+export default function getJsonPath(
+  jsonText: string,
+  offsetPosition: number,
+  options?: Options,
+) {
   const location = jsonc.getLocation(jsonText, offsetPosition);
+
   const path: string = location.path.reduce(
     (
       accumulated: string,
@@ -9,7 +19,7 @@ export default function getJsonPath(jsonText: string, offsetPosition: number) {
       index: number,
     ): string => {
       const isFirst = index === 0;
-      const propertyPath = getPropertyPath(propertyName, isFirst);
+      const propertyPath = getPropertyPath(propertyName, isFirst, options);
       if (!isFirst) {
         return accumulated + propertyPath;
       }
@@ -23,12 +33,13 @@ export default function getJsonPath(jsonText: string, offsetPosition: number) {
 function getPropertyPath(
   propertyName: jsonc.Segment,
   isFirst: boolean,
+  options?: Options,
 ): string {
   if (Number.isInteger(propertyName)) {
     return `[${propertyName}]`;
   }
   const requiresQuotes = propertyRequiresQuotes(propertyName);
-  if (requiresQuotes) {
+  if (requiresQuotes || options?.useBracketNotation) {
     return getPropertyPathWithQuotes(propertyName);
   }
   if (isFirst) {

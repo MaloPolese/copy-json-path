@@ -30,3 +30,11 @@ This extension allows you to copy and paste a jsonpath
 # Showcase
 
 ![Showcase 1](assets/showcase-1.gif 'How to copy')
+
+# Configuration
+
+## Bracket notation
+
+If you want to use bracket notation instead of dot notation, you can set the `copy-json-path.bracketNotation` setting to `true`.
+
+![Bracket notation setting](assets/settings-bracket-notation.png 'bracket notation')
