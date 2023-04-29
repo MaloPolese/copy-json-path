@@ -6,7 +6,7 @@ enum QuoteType {
   Double = 'Double',
 }
 
-interface Options {
+export interface Options {
   includeFileName?: boolean;
   useBracketNotation?: boolean;
   quote?: String;
@@ -47,7 +47,6 @@ function includeTitle(path: jsonc.JSONPath, editor: TextEditor | undefined) {
   const fileName = editor?.document.fileName.split('/').pop()?.split('.')[0];
 
   if (fileName) {
-    const a: jsonc.Segment = fileName;
     path.unshift(fileName);
   }
 }
