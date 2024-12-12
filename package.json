@@ -26,6 +26,16 @@
         "group": "myGroup@1"
       }
     ],
+    "keybindings": [
+      {
+        "command": "copy-json-path.copy",
+        "key": "cmd+alt+c",
+        "mac": "cmd+alt+c",
+        "linux": "ctrl+alt+c",
+        "windows": "ctrl+alt+c",
+        "when": "editorTextFocus && (editorLangId == 'json' || editorLangId == 'jsonc')"
+      }
+    ],
     "configuration": {
       "title": "Copy Json Path",
       "properties": {
