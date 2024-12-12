@@ -87,9 +87,14 @@ export function getPropertyPathWithQuotes(
   return `[${propertyNameJson}]`;
 }
 
-export const nonQuotedCharacterRanges = ['A-Z', 'À-Ö', 'Ø-ö', 'ø-ÿ'];
+export const nonQuotedCharacterRanges = ['A-Z', 'À-Ö', 'Ø-ö', 'ø-ÿ', '0-9'];
 
 export function propertyRequiresQuotes(propertyName: jsonc.Segment): boolean {
+  // If the property start with a numbrer we are forced to require quotes
+  if (propertyName.toString().match(/^\d/)) {
+    return true;
+  }
+  
   // https://stackoverflow.com/questions/20690499/concrete-javascript-regular-expression-for-accented-characters-diacritics/26900132#26900132
   const allowedCharRanges = nonQuotedCharacterRanges.join('');
   const allowedCharactersWithoutEscaping = new RegExp(
