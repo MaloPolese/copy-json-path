@@ -94,7 +94,7 @@ export function propertyRequiresQuotes(propertyName: jsonc.Segment): boolean {
   if (propertyName.toString().match(/^\d/)) {
     return true;
   }
-  
+
   // https://stackoverflow.com/questions/20690499/concrete-javascript-regular-expression-for-accented-characters-diacritics/26900132#26900132
   const allowedCharRanges = nonQuotedCharacterRanges.join('');
   const allowedCharactersWithoutEscaping = new RegExp(

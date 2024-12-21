@@ -56,3 +56,13 @@ Our commit convention follow the [Conventional Commits 1.0.0-beta.4](https://www
 ### Sign commit message
 
 Please consider signing the commit message at least with `Signed-Off-By`. This is a way to certify that you wrote the code or otherwise have the right to pass it on as an open-source patch. The process is simple: if you can certify the [Developer's Certificate of Origin](https://developercertificate.org/) (DCO), then just add a line to every git commit message:
+
+### Commit hooks
+
+This repository uses [husky](https://typicode.github.io/husky/) for commit hooks.
+For each commit, the following checks are performed:
+
+- Lint
+- Format
+- Tests
+- Commit message convention check
