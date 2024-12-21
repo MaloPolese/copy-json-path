@@ -71,9 +71,19 @@ suite('Extension Test Suite', () => {
         console.log(`Testing range '${range}' char: '${c}', index: ${index}`);
 
         let json = { [c]: 1 };
-        test_json_path(json, 3, c, 1);
+        if (c.toString().match(/^\d/)) {
+          test_json_path(json, 3, `["${c}"]`, 1);
+        } else {
+          test_json_path(json, 3, c, 1);
+        }
       }
     }
+  });
+
+  test('getJsonPath test specific use cases', () => {
+    test_json_path({ '0165foo': 1 }, 3, `["0165foo"]`, 1);
+    test_json_path({ foo115: 1 }, 3, `foo115`, 1);
+    test_json_path({ '5454': 1 }, 3, `["5454"]`, 1);
   });
 
   test('getJsonPath test change quote type', () => {
